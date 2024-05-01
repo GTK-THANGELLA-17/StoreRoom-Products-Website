@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Storeroom - Browse Products</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Reset and Global Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(109.6deg, rgb(36, 45, 57) 11.2%, rgb(16, 37, 60) 51.2%, rgb(0, 0, 0) 98.6%);
+            color: #fff;
+            padding: 20px 0;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+#about h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        #about p {
+            font-size: 1.1rem;
+        }
+
+        nav ul {
+            list-style: none;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            transition: background 0.3s ease;
+        }
+
+        nav ul li a i {
+            margin-right: 5px;
+        }
+
+        nav ul li a:hover {
+            background: #536dfe;
+        }
+
+        main {
+            padding-bottom: 60px; /* Adjust footer space */
+        }
+
+        footer {
+           background: radial-gradient(circle at 24.1% 68.8%, rgb(50, 50, 50) 0%, rgb(0, 0, 0) 99.4%);
+            color: #fff;
+            padding: 20px 0;
+        }
+
+        footer ul {
+            list-style: none;
+            text-align: center;
+        }
+
+        footer ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        footer ul li a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer ul li a:hover {
+            color: #536dfe;
+        }
+
+        .product-card {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .product-card p {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #fff;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            z-index: 9999;
+            display: none;
+        }
+
+        .popup h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .popup p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .popup button {
+            padding: 10px 20px;
+            background-color: #536dfe;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .popup button:hover {
+            background-color: #3f51b5;
+        }
+
+.product-image {
+    max-width: 100%; /* Adjust to your preference */
+    max-height: 200px; /* Adjust to your preference */
+    display: block;
+    margin: auto; /* Center the image horizontally */
+}
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Welcome to People's [Storeroom]</h1>
+            <p>Find new homes for your unused items!</p>
+            <nav>
+                <ul>
+                    <li><a href="https://gtk-thangella-17.github.io/Storeroom-Sell-Rent-Form-webpage/" target="_blank"><i class="fas fa-shopping-cart"></i> To Sell/Rent Form</a></li>
+                    <li><a href="#browse"><i class="fas fa-search"></i> Browse Products</a></li>
+                    <li><a href="#login"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                    <li><a href="#signup"><i class="fas fa-user-plus"></i> Sign Up</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+<section id="about">
+        <div class="container fade-in">
+            <h2>About Storeroom</h2>
+            <p>StoreRoom Browse Products is a platform where you can Buy or Rent The unused Products Of People.</p>
+        </div>
+    </section>
+
+
+
+    <main>
+<select id="category-select" onchange="filterProducts()">
+    <option value="" disabled selected>Select Category</option>
+    <option value="all">All Categories</option>
+    <option value="Electronics">Electronics</option>
+    <option value="Furniture">Furniture</option>
+    <option value="Clothing">Clothing</option>
+    <!-- Add more categories as needed -->
+</select>
+
+        <section id="products">
+            <div class="container">
+                <h2>Browse Products</h2>
+                <div id="product-list">
+                    <!-- Product cards will be dynamically added here -->
+                    <div class="product-card" onclick="showPopup('Sont tv 32 inch')" data-category="electronics">
+<img class="product-image" src="./Assests/images/Sony 32inch tv.jpg" alt="Sony 32inch TV Image">
+                        <h3><i class="fas fa-tag"></i> Sony tv 32 inch</h3>
+                        <p><i class="fas fa-file-alt"></i> Description: i want to give the tv for the person who need it </p>
+                        <p><i class="fas fa-user"></i> Owner Name: anil</p>
+                        <p><i class="fas fa-phone"></i> Owner Number: ****464957</p>
+                        <p><i class="fas fa-envelope"></i> Email Address: ****@gmail.com</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Location Address: ****Hyderadad , India</p>
+<p><i class="fas fa-th"></i> Category: Electrical Appliances</p>
+    <p><i class="fas fa-certificate"></i> Brand: Sony</p>
+    <p><i class="fas fa-tag"></i> Model: X750</p>
+    <p><i class="fas fa-palette"></i> Color: Black</p>
+    <p><i class="fas fa-money-bill-wave"></i> Price Type: Fixed=10,000/-</p>
+    <p><i class="fas fa-handshake-alt"></i> Sale/Rent: Sale</p>
+                    </div>
+
+                    <div class="product-card" onclick="showPopup('Fridge samsung')" data-category="electronics">
+<img class="product-image" src=".\Assests\images\Samsung fridge.jpg" alt="Sony 32inch TV Image">
+                        <h3><i class="fas fa-tag"></i> Fridge samsung </h3>
+                        <p><i class="fas fa-file-alt"></i> Description: i want to give the tv for the person who need it </p>
+                        <p><i class="fas fa-user"></i> Owner Name: anil</p>
+                        <p><i class="fas fa-phone"></i> Owner Number: ****464957</p>
+                        <p><i class="fas fa-envelope"></i> Email Address: ****@gmail.com</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Location Address: ****Hyderadad , India</p>
+<p><i class="fas fa-th"></i> Category: Electrical Appliances</p>
+    <p><i class="fas fa-certificate"></i> Brand: Samsung</p>
+    <p><i class="fas fa-tag"></i> Model: Smart</p>
+    <p><i class="fas fa-palette"></i> Color: Grey</p>
+    <p><i class="fas fa-money-bill-wave"></i> Price Type: Fixed=25,000/-</p>
+    <p><i class="fas fa-handshake-alt"></i> Sale/Rent: Sale</p>
+                    </div>
+
+                    <div class="product-card" onclick="showPopup('Washing Machine 10kg panasonic',)" data-category="electronics">
+
+<img class="product-image" src=".\Assests\images\Samsung washing machine.jpg" alt="Sony 32inch TV Image">
+                        <h3><i class="fas fa-tag"></i> Washing Machine 10kg panasonic</h3>
+                        <p><i class="fas fa-file-alt"></i> Description: i want to give the tv for the person who need it </p>
+                        <p><i class="fas fa-user"></i> Owner Name: Prakash</p>
+                        <p><i class="fas fa-phone"></i> Owner Number: ****464957</p>
+                        <p><i class="fas fa-envelope"></i> Email Address: ****@gmail.com</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Location Address: ****Hyderadad , India</p>
+<p><i class="fas fa-th"></i> Category:Electrical Appliances</p>
+    <p><i class="fas fa-certificate"></i> Brand: Samsung</p>
+    <p><i class="fas fa-tag"></i> Model: ABC123</p>
+    <p><i class="fas fa-palette"></i> Color: White</p>
+    <p><i class="fas fa-money-bill-wave"></i> Price Type: Fixed=15,000/-</p>
+    <p><i class="fas fa-handshake-alt"></i> Sale/Rent: Sale</p>
+                    </div>
+                    <!-- Add more product cards as needed -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <ul>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+                <li><a href="#privacy">Privacy Policy</a></li>
+                <li><a href="#terms">Terms of Service</a></li>
+<li>@2024 Design And Build By G.Thangella<lip>
+
+            </ul>
+
+
+
+        </div>
+    </footer>
+
+<div class="popup" id="popup">
+    <h2>Product Details</h2>
+    <p>If you're interested in this product, just click "Send Details" to be directed to your email. Please include your name, phone number, and address in the email And There Fill The Produdt Details, sent from your Gmail account. We'll swiftly reach out to verify your details and provide the owner's information.</p>
+    <button onclick="redirectToMail()">Send Details</button>
+    <button onclick="closePopup()">Cancel</button> <!-- Added cancel button -->
+</div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function showPopup(productName) {
+            $('#popup').fadeIn();
+            // You can add specific details related to the product here if needed
+        }
+
+ function showPopup(productName) {
+        $('#popup').fadeIn();
+        // You can add specific details related to the product here if needed
+    }
+
+    function closePopup() {
+        $('#popup').fadeOut();
+    }
+
+    // Close popup when clicking anywhere outside of it
+    $(document).mouseup(function(e) {
+        var container = $('#popup');
+        if (!container.is(e.target) && container.has(e.target).length === 0) {
+            container.fadeOut();
+        }
+    });
+
+    function sendProductDetails() {
+        $('#popup').fadeOut(); // Close the popup
+        redirectToMail(); // Redirect to email client
+    }
+
+
+        function redirectToMail(productName, description, ownerName, ownerNumber, ownerEmail, locationAddress, category, brand, model, color, priceType, saleRent) {
+    $('#popup').fadeOut(); // Close the popup
+    let subject = `Interested in your ${productName}`;
+    let body = `Please send me more details about your ${productName}.\n\n`;
+    body += `Description: ${description}\n`;
+    body += `Owner Name: ${ownerName}\n`;
+    body += `Owner Number: ${ownerNumber}\n`;
+    body += `Owner Email: ${ownerEmail}\n`;
+    body += `Location Address: ${locationAddress}\n`;
+    body += `Category: ${category}\n`;
+    body += `Brand: ${brand}\n`;
+    body += `Model: ${model}\n`;
+    body += `Color: ${color}\n`;
+    body += `Price Type: ${priceType}\n`;
+    body += `Sale/Rent: ${saleRent}\n`;
+
+    let mailtoLink = `mailto:imgtk17@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailtoLink;
+}
+
+function showPopup(productName) {
+    $('#popup').fadeIn();
+    document.getElementById('product-name').value = productName;
+    // You can set other product details dynamically here
+}
+
+       function filterProducts() {
+        var selectedCategory = document.getElementById('category-select').value;
+        var productCards = document.querySelectorAll('.product-card');
+
+        productCards.forEach(function(card) {
+            var categories = card.getAttribute('data-category').split(' ');
+            if (selectedCategory === 'all' || categories.includes(selectedCategory.toLowerCase())) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+ 
+</script>
+
+
+    </script>
+</body>
+</html>
